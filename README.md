@@ -1,3 +1,25 @@
+Build FFmpeg lib for Android
+=============
+
+- Android NDK (better android-ndk-r25c and later version)
+
+- Linux(Ubuntu 20.04)
+
+## Build
+
+>>git clone https://github.com/jnulzl/ffmpeg_android_lib.git
+>>git switch ffmpeg_android_lib
+>>./configure --disable-x86asm
+>>export ANDROID_NDK=/mnt/data/jnulzl/Softwares/android-ndk-r25c
+>>bash ./build_android_arm64-v8a_clang.sh # For arm64-v8a
+>>bash ./build_android_armeabi-v7a_clang.sh # For armeabi-v7a
+
+Install directory is '$PWD/android'
+
+## Ref
+
+[FFmpeg编译与集成](https://blog.csdn.net/Kennethdroid/article/details/106956601)
+
 FFmpeg README
 =============
 

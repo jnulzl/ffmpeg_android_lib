@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# export ANDROID_NDK=/mnt/data/jnulzl/Softwares/android-ndk-r27c
+TOOLCHAIN=$ANDROID_NDK/toolchains/llvm/prebuilt/linux-x86_64
+
+
+function build_android
+{
+
+./configure \
+--prefix=$PREFIX \
+--enable-neon  \
+--enable-hwaccels  \
+--enable-gpl   \
+--disable-postproc \
+--disable-debug \
+--enable-small \
+--enable-jni \
+--enable-mediacodec \
+--enable-decoder=h264_mediacodec \
+--enable-static \
+--enable-shared \
+--disable-doc \
+--enable-ffmpeg \
+--disable-ffplay \
+--disable-ffprobe \
+--disable-avdevice \
+--disable-doc \
+--disable-symver \
+--cross-prefix=$CROSS_PREFIX \
+--target-os=android \
+--arch=$ARCH \
+--cpu=$CPU \
+--cc=$CC \
+--cxx=$CXX \
+--enable-cross-compile \
+--sysroot=$SYSROOT \
+--extra-cflags="-Os -fpic $OPTIMIZE_CFLAGS" \
+--extra-ldflags="$ADDI_LDFLAGS"
+
+make clean
+make -j8
+make install
+
+echo "============================ build android arm64-v8a success =========================="
+
+}
+
+#arm64-v8a
+ARCH=arm
+CPU=armv7-a
+API=21
+CC=$TOOLCHAIN/bin/armv7a-linux-androideabi$API-clang
+CXX=$TOOLCHAIN/bin/armv7a-linux-androideabi$API-clang++
+SYSROOT=$ANDROID_NDK/toolchains/llvm/prebuilt/linux-x86_64/sysroot
+CROSS_PREFIX=$TOOLCHAIN/bin/llvm-
+PREFIX=$(pwd)/android/$CPU
+OPTIMIZE_CFLAGS="-mfloat-abi=softfp -mfpu=vfp -marm -march=$CPU"
+
+build_android
+
