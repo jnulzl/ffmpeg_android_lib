@@ -7,14 +7,16 @@ Build FFmpeg lib for Android
 
 ## Build
 
+```shell
 >>git clone https://github.com/jnulzl/ffmpeg_android_lib.git
 >>git switch ffmpeg_android_lib
 >>./configure --disable-x86asm
 >>export ANDROID_NDK=/mnt/data/jnulzl/Softwares/android-ndk-r25c
 >>bash ./build_android_arm64-v8a_clang.sh # For arm64-v8a
 >>bash ./build_android_armeabi-v7a_clang.sh # For armeabi-v7a
+```
 
-Install directory is '$PWD/android'
+Install directory is `$PWD/android`
 
 ## Ref
 
